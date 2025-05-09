@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
             if (state is AuthAuthenticated) {
               AppNavigation.navigationPushReplacement(
                 context,
-                screen: OrdersPage(),
+                screen: const OrdersPage(),
               );
             } else if (state is AuthError) {
               ScaffoldMessenger.of(

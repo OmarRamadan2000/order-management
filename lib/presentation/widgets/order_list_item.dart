@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:order_management/presentation/widgets/order/order_status_chip.dart';
 import '../../../domain/entities/order.dart';
 
 class OrderListItem extends StatelessWidget {
@@ -7,7 +8,7 @@ class OrderListItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const OrderListItem({Key? key, required this.order, required this.onTap})
-    : super(key: key);
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class OrderListItem extends StatelessWidget {
             4.verticalSpace,
             Text(order.address),
             8.verticalSpace,
-            _buildStatusChip(),
+            OrderStatusChip(status: order.status),
           ],
         ),
         trailing: ElevatedButton(
@@ -34,29 +35,6 @@ class OrderListItem extends StatelessWidget {
         ),
         onTap: onTap,
       ),
-    );
-  }
-
-  Widget _buildStatusChip() {
-    Color color;
-    switch (order.status.toLowerCase()) {
-      case 'delivered':
-        color = Colors.green;
-        break;
-      case 'cancelled':
-        color = Colors.red;
-        break;
-      case 'processing':
-        color = Colors.orange;
-        break;
-      default:
-        color = Colors.blue;
-    }
-
-    return Chip(
-      label: Text(order.status),
-      backgroundColor: color.withOpacity(0.2),
-      labelStyle: TextStyle(color: color),
     );
   }
 }
